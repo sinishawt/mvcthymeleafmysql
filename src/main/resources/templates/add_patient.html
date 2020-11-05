@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Add Patient</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/add_patient}" th:object="${patient}" method="post">
+    <div class="box">
+        <h3>Quick Add</h3>
+        <div class="columns three">
+            <div class="col">
+
+                    <li>
+                        <label for="firstName">First Name</label>
+                        <div>
+                            <input type="text" th:field="*{firstName}" id="firstName" placeholder="FirstName">
+                            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="lastName">Last Name</label>
+                        <div>
+                            <input type="text" th:field="*{lastName}" id="lastName" placeholder="LastName">
+                            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col">
+                <ul class="form table">
+                    <li>
+                        <label for="email">Email</label>
+                        <div>
+                            <input type="text" th:field="*{email}" id="email" placeholder="Email">
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="phoneNumber">Phone Number</label>
+                        <div>
+                            <input type="text" th:field="*{phoneNumber}" id="phoneNumber" placeholder="Phone Number">
+                            <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="zipCode">Zip Code</label>
+                        <div>
+                            <input type="text" th:field="*{zipCode}" id="zipCode" placeholder="Zip Code">
+                            <span th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col">
+                <ul class="form table">
+                    <li>
+                        <label for="billAmount">Bill Amount</label>
+                        <div>
+                            <input type="text" th:field="*{billAmount}" id="billAmount" placeholder="billAmount">
+                            <span th:if="${#fields.hasErrors('billAmount')}" th:errors="*{billAmount}"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="accountNo">Account Number</label>
+                        <div>
+                            <input type="text" th:field="*{accountNo}" id="accountNo" placeholder="accountNo">
+                            <span th:if="${#fields.hasErrors('accountNo')}" th:errors="*{accountNo}"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="dos">D.O.S</label>
+                        <div>
+                            <input type="date" th:field="*{dos}" id="dos" placeholder="D.o.s">
+                            <span th:if="${#fields.hasErrors('dos')}" th:errors="*{dos}"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <input type="submit" value="Add Patient">
+    </div>
+
+</form>
+
+</body>
+</html>
