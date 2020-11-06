@@ -33,4 +33,8 @@ public class UserService {
     public void delete(Integer id) {
          userRepository.deleteById(id);
     }
+
+    public void saveAll(List<User> users){
+        userRepository.saveAll(users);
+    }
 }

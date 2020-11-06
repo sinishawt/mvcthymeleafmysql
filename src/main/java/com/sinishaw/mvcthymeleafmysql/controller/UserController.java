@@ -1,7 +1,9 @@
 package com.sinishaw.mvcthymeleafmysql.controller;
 
 import com.sinishaw.mvcthymeleafmysql.model.User;
+import com.sinishaw.mvcthymeleafmysql.model.Users;
 import com.sinishaw.mvcthymeleafmysql.service.UserService;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -31,8 +35,19 @@ public class UserController {
     }
 
     @GetMapping("/signup")
-    public String showSignUp(User user){
+    public String showSignUp(Model model){
+        model.addAttribute("user", new User());
         return "addusers";
+    }
+
+    @GetMapping("/add_manyUsers")
+    public String showAddManyUsers(Model model){
+
+        List<User> users = new ArrayList<>();
+        userService.listAllUsers().iterator().forEachRemaining(users::add);
+        model.addAttribute("form", new Users(users));
+
+        return "addbulkusers";
     }
 
     @PostMapping(value = "/adduser")
@@ -74,6 +89,16 @@ public class UserController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         userService.delete(id);
         model.addAttribute("users", userService.listAllUsers());
+        return "index";
+    }
+
+    @PostMapping("/saveAll")
+    public String saveAllUser(@ModelAttribute Users users, Model model){
+
+        userService.saveAll(users.getUsers());
+
+        model.addAttribute("users", userService.listAllUsers());
+
         return "index";
     }
 
