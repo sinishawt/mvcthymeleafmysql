@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Home</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/saveAll}" th:object="${form}" method="post">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th> Title</th>
+            <th> Author</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user, itemStat : *{users}">
+            <td><input th:placeholder="Name + ' ' + ${itemStat.count}" th:field="*{users[__${itemStat.index}__].name}" required/></td>
+            <td><input th:placeholder="Email + ' ' + ${itemStat.count}" th:field="*{users[__${itemStat.index}__].email}" required/></td>
+        </tr>
+        </tbody>
+    </table>
+<!--    -->
+<!--    <label for="name">Name</label>-->
+<!--    <input type="text" th:field="*{name}" id="name" placeholder="Name">-->
+<!--&lt;!&ndash;    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>&ndash;&gt;-->
+<!--    <label for="email">Email</label>-->
+<!--    <input type="text" th:field="*{email}" id="email" placeholder="Email">-->
+<!--&lt;!&ndash;    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>&ndash;&gt;-->
+    <input type="submit" value="Add User">
+</form>
+
+</body>
+</html>
