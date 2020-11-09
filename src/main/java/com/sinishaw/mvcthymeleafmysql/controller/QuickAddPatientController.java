@@ -32,7 +32,7 @@ public class QuickAddPatientController {
     @PostMapping("/add_patient")
     public String addPatient(@Valid Patient patient, BindingResult result, Model model){
         Patient p = patientService.addPatient(patient);
-        System.out.println("date is" + patient.getDos());
+       // System.out.println("date is" + patient.getDos());
         System.out.println("added Patient" + p.toString());
         return "redirect:/index";
     }

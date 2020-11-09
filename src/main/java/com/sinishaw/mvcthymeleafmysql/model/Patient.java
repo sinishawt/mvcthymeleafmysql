@@ -26,7 +26,7 @@ public class Patient {
     private Integer zipCode;
     private Double billAmount;
     private Integer accountNo;
-    @DateTimeFormat(pattern="mm-dd-yyyy")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dos;
 
 }
