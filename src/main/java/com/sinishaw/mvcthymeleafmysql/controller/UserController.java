@@ -1,6 +1,7 @@
 package com.sinishaw.mvcthymeleafmysql.controller;
 
 import com.sinishaw.mvcthymeleafmysql.model.User;
+import com.sinishaw.mvcthymeleafmysql.model.UserRequest;
 import com.sinishaw.mvcthymeleafmysql.model.Users;
 import com.sinishaw.mvcthymeleafmysql.service.UserService;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -41,7 +42,7 @@ public class UserController {
 
     @GetMapping("/signup")
     public String showSignUp(Model model){
-        model.addAttribute("user", new User());
+        model.addAttribute("userRequest", new UserRequest());
         return "addusers";
     }
 
@@ -56,11 +57,11 @@ public class UserController {
     }
 
     @PostMapping(value = "/adduser")
-    public String addUser(@Valid User user, BindingResult result, Model model){
+    public String addUser(@Valid UserRequest user, BindingResult result, Model model){
 //        if(result.hasErrors()){
 //            return "addusers";
 //        }
-        userService.addUser(user);
+        userService.addUser(user.getUser());
         System.out.println("*******Added User***********");
         model.addAttribute("users", userService.listAllUsers());
         return "redirect:/index";
@@ -114,7 +115,7 @@ public class UserController {
     }
 
     @PostMapping("/import")
-    public String mapReapExcelDatatoDB(@RequestParam("file") MultipartFile reapExcelDataFile) throws IOException {
+    public String mapReapExcelDatatoDB(@RequestParam("file") MultipartFile reapExcelDataFile, Model model) throws IOException {
 
         List<User> tempStudentList = new ArrayList<User>();
         XSSFWorkbook workbook = new XSSFWorkbook(reapExcelDataFile.getInputStream());
@@ -136,7 +137,9 @@ public class UserController {
             System.out.println(u.getName() + " **************** ");
         }
        // System.out.println(tempStudentList.toString());
-        return "redirect:/index";
+
+        model.addAttribute("users", userService.saveAll(tempStudentList));
+        return "index";
     }
 
 }

@@ -34,7 +34,7 @@ public class UserService {
          userRepository.deleteById(id);
     }
 
-    public void saveAll(List<User> users){
-        userRepository.saveAll(users);
+    public List<User> saveAll(List<User> users){
+        return userRepository.saveAll(users);
     }
 }

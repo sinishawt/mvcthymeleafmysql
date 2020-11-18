@@ -17,9 +17,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user, itemStat : *{users}">
-            <td><input th:placeholder="Name + ' ' + ${itemStat.count}" th:field="*{users[__${itemStat.index}__].name}" required/></td>
-            <td><input th:placeholder="Email + ' ' + ${itemStat.count}" th:field="*{users[__${itemStat.index}__].email}" required/></td>
+<!--        <tr th:each="user, itemStat : *{users}">-->
+<!--            <td><input th:placeholder="Name + ' ' + ${itemStat.count}" th:field="*{users[__${itemStat.index}__].name}" required/></td>-->
+<!--            <td><input th:placeholder="Email + ' ' + ${itemStat.count}" th:field="*{users[__${itemStat.index}__].email}" required/></td>-->
+<!--        </tr>-->
+
+        <tr th:each="user, itemStat : ${#numbers.sequence(1, 10)}">
+            <td><label>Name: </label><input th:field="*{users[__${itemStat.index}__].name}" required/></td>
+            <td><label>Email: </label><input th:field="*{users[__${itemStat.index}__].email}" required/></td>
         </tr>
         </tbody>
     </table>
