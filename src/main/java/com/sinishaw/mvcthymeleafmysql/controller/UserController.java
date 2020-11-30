@@ -142,4 +142,19 @@ public class UserController {
         return "index";
     }
 
+    @GetMapping(value = "/guests/{surname}")
+    public String showGuestList(Model model, @PathVariable("surname") String surname) {
+
+        model.addAttribute("guests", userService.findUserByName(surname));
+
+        return "resultsList";
+    }
+
+    @GetMapping(value = "/guests")
+    public String showGuestList(Model model) {
+        model.addAttribute("guests", userService.listAllUsers());
+
+        return "resultsList";
+    }
+
 }
